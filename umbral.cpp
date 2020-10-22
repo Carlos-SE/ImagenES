@@ -4,6 +4,8 @@
 
 #include <imagenES.h>
 
+
+//Hecho por Ana Vico
 using namespace std;
 
 int main (int argc, char *argv[]){

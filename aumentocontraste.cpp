@@ -73,10 +73,7 @@ int main(int argc, char *argv[]){
         }
     }
 
-
-    cout << minOrigen << endl << maxOrigen << endl;
-    cout << minSalida << endl << maxSalida << endl;
-    
+  
     float cociente = (maxSalida-minSalida)/(maxOrigen-minOrigen);   //variable para evitar operaciones innecesarias
 
     int nuevoColor;
@@ -90,13 +87,22 @@ int main(int argc, char *argv[]){
     escribir = EscribirImagenPGM(destino, image, fils, cols);
 
 }
-
+/**
+ * @brief Devuelve el valor de gris que tendrá el pixel después de aplicar la transformación lineal
+ * 
+ * @param indice es el índice por el cual se guiará @a *imagen
+ * @param *imagen es el conjunto de datos
+ * @param nmin es el valor mínimo que tendrá el archivo de salida
+ * @param omin es el valor mínimo que tiene el archivo de entrada
+ * @param coeficiente es el valor de (max - min)/(b - a) declarado en el main para evitar repetición de cálculos
+ * @return Devuelve un entero que será el valor de la escala de gris del pixel
+ */
 int AplicarTransformacionLineal(int indice, unsigned char *imagen, int nmin, int omin, float cociente){
 
     int color = imagen[indice];
     int colorSalida;
 
-    colorSalida = round(nmin + cociente*(color-omin));
+    colorSalida = round(nmin + (cociente*(color-omin)));
 
     return colorSalida;
 

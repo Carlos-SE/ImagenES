@@ -1,4 +1,13 @@
-all : icono clean
+all : presentacion icono clean
+
+presentacion :
+	@echo
+	@echo "    ______________  _   ______" 
+	@echo "   /  _/ ____/ __ \\/ | / / __ \\"
+	@echo "   / // /   / / / /  |/ / / / /"
+	@echo " _/ // /___/ /_/ / /|  / /_/ /"
+	@echo "/___/\____/\____/_/ |_/\____/"
+	@echo
 
 icono : icono.o imagen.o
 	g++ -o icono icono.o imagen.o

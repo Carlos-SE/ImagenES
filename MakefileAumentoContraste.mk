@@ -1,13 +1,20 @@
-all : Aumento clean
+HOME = .
+BIN = $(HOME)/bin
+INCLUDE = $(HOME)/include
+OBJ = $(HOME)/obj
+SRC = $(HOME)/src
 
-Aumento : aumentocontraste.o imagen.o
-	g++ -o Aumento aumentocontraste.o imagen.o
 
-aumentocontraste.o : aumentocontraste.cpp
-	g++ -c -o aumentocontraste.o aumentocontraste.cpp -I./
+all : $(BIN)/Aumento clean
 
-imagen.o : imagenES.cpp
-	g++ -o imagen.o -c imagenES.cpp
+$(BIN)/Aumento : $(OBJ)/aumentocontraste.o $(OBJ)/imagen.o
+	g++ -o $(BIN)/Aumento $(OBJ)/aumentocontraste.o $(OBJ)/imagen.o
+
+$(OBJ)/aumentocontraste.o : $(SRC)/aumentocontraste.cpp
+	g++ -c -o $(OBJ)/aumentocontraste.o $(SRC)/aumentocontraste.cpp -I$(INCLUDE)
+
+$(OBJ)/imagen.o : $(SRC)/imagenES.cpp
+	g++ -o $(OBJ)/imagen.o -c $(SRC)/imagenES.cpp -I$(INCLUDE)
 
 clean :
-	rm ./*.o
+	rm $(OBJ)/*.o

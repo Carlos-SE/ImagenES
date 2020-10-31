@@ -98,10 +98,11 @@ int main (int argc, char *argv[]){
         for (int i = 0; i < nfils; i++){
             if (i < nfils-filas_sobra){
                 MatrizPaso[i][j] = GetValorMedioFilas(ImagenMatriz, p_conversion_f, i, filas_completas, j);
-                cout << "LLega aqui ln 101" << endl;
+                cout << "LLega aqui ln 101. Iteracion: " << i+j*i << endl;
             }
             else{
                 MatrizPaso[i][j] = GetValorMedioFilas(ImagenMatriz, p_conversion_f+1, i, filas_completas, j);
+                cout << "LLega aqui ln 105. Iteracion: " << i+j*i << endl;
             }
         }
     }
@@ -176,7 +177,7 @@ unsigned char GetValorMedioFilas(unsigned char **datos, int factor_filas, int po
         valor += datos[origen+i][col];
     }
 
-    valor = valor/factor_filas;
+    valor = round(valor/factor_filas);
 
     return valor;
 }
@@ -202,7 +203,7 @@ unsigned char GetValorMedioCols(unsigned char **datos, int factor_cols, int posi
          valor += datos[fila][origen+i];
      }
 
-     valor = valor/factor_cols;
+     valor = round(valor/factor_cols);
 
      return valor;
 }

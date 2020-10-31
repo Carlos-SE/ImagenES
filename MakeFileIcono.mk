@@ -1,4 +1,12 @@
-all : presentacion icono clean
+HOME = .
+BIN = $(HOME)/bin
+INCLUDE = $(HOME)/include
+OBJ = $(HOME)/obj
+SRC = $(HOME)/src
+
+
+
+all : presentacion $(BIN)/icono clean
 
 presentacion :
 	@echo
@@ -9,15 +17,15 @@ presentacion :
 	@echo "/___/\____/\____/_/ |_/\____/"
 	@echo
 
-icono : icono.o imagen.o
-	g++ -o icono icono.o imagen.o
+$(BIN)/icono : $(OBJ)/icono.o $(OBJ)/imagen.o
+	g++ -o $(BIN)/icono $(OBJ)/icono.o $(OBJ)/imagen.o
 
-icono.o : icono.cpp
-	g++ -c -o icono.o icono.cpp -I./
+$(OBJ)/icono.o : $(SRC)/icono.cpp
+	g++ -c -o $(OBJ)/icono.o $(SRC)/icono.cpp -I$(INCLUDE)
 
 
-imagen.o : imagenES.cpp
-	g++ -o imagen.o -c imagenES.cpp -I./
+$(OBJ)/imagen.o : $(SRC)/imagenES.cpp
+	g++ -o $(OBJ)/imagen.o -c $(SRC)/imagenES.cpp -I$(INCLUDE)
 
 clean :
-	rm ./*.o
+	rm $(OBJ)/*.o

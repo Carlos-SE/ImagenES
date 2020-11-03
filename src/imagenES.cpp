@@ -1,6 +1,6 @@
  /**
   * @file imagenES.cpp
-  * @brief Fichero con definiciones para la E/S de imágenes
+  * @brief Fichero con definiciones para la E/S de imï¿½genes
   *
   * Permite la E/S de archivos de tipo PGM,PPM
   *
@@ -8,64 +8,11 @@
 
 #include <fstream>
 #include <string>
+#include <iostream>
 
 #include "imagenES.h"
 
 using namespace std;
-
-
-// _____________________________________________________________________________
-
-
-Imagen::Imagen(){
-  fils = cols = 0;
-}
-
-// _____________________________________________________________________________
-
-Imagen::Imagen(const Imagen &J){
-  if (this != &J){
-    Liberar();
-    Reservar (J.fils, J.cols);
-    Copiar (J);
-  }
-}
-// _____________________________________________________________________________
-
-Imagen::Imagen(int filas, int columnas){
-  fils = filas;
-  cols = columnas;
-} 
-
-// _____________________________________________________________________________
-
-Imagen :: ~Imagen(){
-  Liberar();
-}
-
-// _____________________________________________________________________________
-
-int Imagen :: num_filas() const{
-  return fils;
-}
-
-// _____________________________________________________________________________
-
-int Imagen :: num_columnas () const {
-  return cols;
-}
-
-// _____________________________________________________________________________
-
-void Imagen :: asigna_pixel (int fila, int col, byte valor){
-  img [fila][col] = valor;
-}
-
-// _____________________________________________________________________________
-
-byte Imagen :: valor_pixel (int fila, int col) const {
-  return img[fila][col];
-}
 
 // _____________________________________________________________________________
 
@@ -188,6 +135,7 @@ bool  EscribirImagenPPM (const char *nombre, const unsigned char *datos,
 bool  EscribirImagenPGM (const char *nombre, const unsigned char *datos, 
                         const int fils, const int cols){
   ofstream f(nombre);
+  
   bool res= true;
   
   if (f){
@@ -199,46 +147,6 @@ bool  EscribirImagenPGM (const char *nombre, const unsigned char *datos,
       res=false;
   }
   return res;
-}
-
-//Métodos privados:
-
-void Imagen :: Reservar (int filas, int columnas){
-  fils = filas;
-  cols = columnas;
-
-  if (fils > 0 && cols > 0){
-    img = new byte *[fils];
-    img[0] = new byte [fils * cols];
-
-    for(int i = 1; i < fils; i ++){
-      img [i] = img[i -1] + cols;
-    }
-  }
-  else
-    img = 0;
-
-}
-
-void Imagen :: Copiar (const Imagen & otra){
-  for (int i = 0; i < fils; i++){
-    for (int j =0; j < cols; j++){
-      img[i][j] = otra.img[i][j];
-    }
-    fils = otra.fils;
-    cols = otra.cols;
-
-  }
-}
-
-void Imagen::Liberar(){
-  if (img !=0 ){
-    delete[] img [0];
-    delete[] img ;
-
-    fils = cols = 0;
-    img = 0;
-  }
 }
 
 /* Fin Fichero: imagenES.cpp */

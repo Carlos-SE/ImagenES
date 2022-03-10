@@ -1,4 +1,4 @@
-ME = .
+HOME = .
 BIN = $(HOME)/bin
 INCLUDE = $(HOME)/include
 OBJ = $(HOME)/obj
